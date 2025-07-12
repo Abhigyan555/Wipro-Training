@@ -1,0 +1,236 @@
+Day 5:
+------
+	Tuple,
+	Dictionary,
+	Set (Accessing, Updating, Slicing)
+	Understanding lists, tuples, dictionaries, and sets
+
+	Adding and Deleting Elements
+	Working with For Loops
+		using in keyword
+	Strings in Python
+=====================================================
+Tuple:
+------
+	Just like lists, it is also a collection where  the data structure is immutable(non-mutable). 
+	
+	lists ==> [] 
+	tuple ==> ()
+	
+	There are places where these immutable types are very useful --> These values are referred to be hashable (It can be used as hashvalue to generate hash keys to access hash table or to be used in hashing functions).
+	
+	tpl = (10,20,30)
+	print(tpl)
+	
+	tpl = tuple([10,20,30])
+	print(tpl)
+	
+	commonly used methods on tuple:
+	
+	1. tpl.count(val)
+	2. tpl.index(val)
+		Remember tuple does not support append,insert, remove, pop methods --> because it immutable
+=========================================================
+Un-packing of tuples:
+---------------------
+	a, b, c = 10, 20, 30
+
+
+Set:
+---
+	It is a mutable data structure which contains unique(no duplicates) elements where each element should be hashable(immutable types like int, str, float, tuple etc)
+	
+	st = {10, 20, 30, 'some', 'some more', 'some', 30, 10}
+
+
+	The elements in the data structure is immutable not the data structure. 
+	
+	some of the commonly used methods.
+	
+	st.add(val)		--> add val into the set 
+	st.remove(val) 	--> removes val from set, error if val not found in set st.
+	st.discard(val) --> removes val from set, No error if val not found in set st.
+	st.pop() 		--> removes and returns an arbitrary element from the set.
+	st.clear() 		--> empties the set 
+	st.update(iterable) --> adds elements from iterable(collection)
+	
+	st.union(st2)   --> returns union of two sets st and st2 
+	st.intersection(st2)   --> returns intersection of two sets st and st2 
+	
+	st.difference(st2) --> return elements present in st but not in st2
+	
+	st.issubset(st2) --> true if this st is subset of st2
+	st.issuperset(st2) --> true if this st is superset of st2
+	
+	Some examples:
+	--------------
+	a = {1, 2, 3}
+	b = {2, 3, 4}
+	print(a.union(b))          # {1, 2, 3, 4}
+	print(a.intersection(b))   # {2, 3}
+=========================================================
+	dt = {'key': 'value'} # store key:value pair as single value.
+		key part of dictionary should be immutable.
+		like int, str, tuple 
+		
+	keys()
+	values()
+	items()
+=======================================================
+	dt.update(dt2)
+	
+	dt.pop(key) --> removes key and returns value
+	dt.popitem() --> removes and returns last(key,value)
+	dt.clear()  --> removes all items 
+	dt.copy()   --> Shallow copy 
+	setdefault(k, val) --> returns value if key exists else sets to val
+========================================================	
+Problems#1:
+-----------
+1. Have a lengthy string. Print each word with its word count from the lengthy string.
+2. Have a lengthy string. Pring each character with its character count from the lengthy string.
+3. Accept a lenghy string: fifty five crore thirty four lakhs twenty three thousand two hundred and sixty seven
+	output: 553423267	
+	nums ={'one': 1, 'two': 2, 'three': 3 ... 'twenty': 20,
+	'thirty': 30, 'forty': 40, 'fifty': 50, ... 'hundred': 100, 'thousand': 1000, 'lakhs': 100000, 'crore': 10000000}
+	
+	num = 5
+	temp = 50 
+	total 
+	num < 100
+		temp += num ==> 55
+	>= 100
+		temp *= num ==> 550000000
+		total += temp 
+		temp = 0	
+	print(total)
+	
+4. Perform the following tasks using dictionary.
+	Create a dictionary for an employee
+	employee = {
+		"name": "Sudhakar",
+		"position": "Manager",
+		"salary": 75000
+	}
+	Task: 
+	# a) Print position
+	# b) Increase salary by 10%
+	# c) Add a new key: department = "Training"
+===========================================================	
+5. Task: Given a list of tuples (course, student), group students by course.
+data = [("Math", "Bobby"), ("Science", "Bablu"), ("Math", "Pinkie"), ("Math","Ram"),("Science", "Chintu")]
+
+# Expected:
+# {
+#     "Math": {"Bobby", "Pinkie", "Ram"},
+#     "Science": {"Bablu", "Chintu"}
+# }
+===========================================================	
+words =['one','two','three','four','five','six',
+'seven','eight','nine','ten','eleven','twelve','thirteen', 'fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty','thirty','forty','fifty','sixty','seventy','eighty','ninety','hundred','thousand','lakhs','crore' ]
+
+nums = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20, 30,40,50,60,70,80,90,100, 1000, 100000, 10000000]
+
+dt = dict(zip(words, nums))
+
+Strings:
+-------
+	a string in Python is a sequence of unicode characters which are enclosed in ', ", ''', or """
+	
+	st2 = "Hello"
+	
+	st3 = '''Hello this is a multi-line
+		strings here'''
+		
+	st4 = """Hello this is a multi-line
+		strings here"""
+	
+	st = 'Python is easy to learn'
+
+slicing:
+-------
+	syntax:
+		collection[start:end:step]
+		
+	strings are immutable:
+	----------------------
+		st1 = "Hello how are you"
+		st1 = 'Hello'
+		
+		st1[0] = 'C' # error
+=========================================================
+commonly used methods of str class:
+----------------------------------
+	st.split()  ==> split string into a list of words by default.
+	st.join(list) --> joins list into a string with st as separator.
+	
+	st.lower()  --> converts to lowercase
+	st.upper()  --> converts to uppercase
+	st.strip()  --> removes whitespace at the begining and end of the given string 
+	st.find(sub) --> find and print the index of the sub string in the string [ returns -1 if not found ]
+	st.replace(a, b) --> find sub-string 'a' and replace with 'b' in the given string 
+	st.count(sub) --> counts the occurrence of sub-string sub 
+==========================================================
+	f'strings'
+	str.format()
+===========================================================	
+f'strings':
+-----------
+	a, b, c = 10 ,123.345, 'hello'
+	
+	print(f'variable a: {a} var b: {b} var c: {c}')
+
+Problems:
+---------
+	1.  Check for Palindrome
+	2.  Check whether give two strings is an Anagram 
+			ate, tea 
+	3.  Capitalize First Letter of Each Word in a string 
+	4.  Check if String is Pangram, which consists of all characters (a-z) atleast one.
+		"The quick brown fox jumps over the lazy dog"
+========================================================
+Joined Today:
+-------------
+	31259	Deepak Kumar Nayak
+	31255	Akhilesh Pathak	
+	31257	prachi singh 
+	31254	Tanishka Oli
+	31269	Prince Mishra
+	31267	Ushashri N 
+	31261	Jyotisman Kriti Prakash
+	31251	Ritika Chopra
+	31252	Archana Kumari
+	31271	Vikash Kumar Singh
+========================================================
+s1, s2 = 'tea', 'ctea'
+st1, st2 = set(s1), set(st2)
+print(st1.intersection(st2))
+========================================================
+To be presenting:
+-----------------
+	Akash M 
+	Vasu Gaur
+	Jyotirmay Choudhary	
+	Amit Pandey
+	Pankaj
+=========================================================
+Topics for tomorrow:
+--------------------
+Python Functions
+	Built-In Functions and Range() Functions
+		Understanding built-in functions like len(), type(), str(), int()
+		Generating sequences using range()
+	User Defined Functions
+		Creating functions
+		Understanding parameters and return values
+
+If possible we will be covering this too:
+=========================================		
+Python Modules
+	Built-In Modules
+		Importing and using built-in modules like math, datetime
+	User Defined Modules
+		Creating and importing user-defined modules
+		Setting up Module Path
+		Understanding PYTHONPATH
+		Adding directories to module path
