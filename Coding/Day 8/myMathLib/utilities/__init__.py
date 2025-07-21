@@ -1,0 +1,1 @@
+from .tools import isEven, isPrime, isArmstrong
