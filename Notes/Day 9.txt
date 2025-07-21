@@ -1,0 +1,273 @@
+day 9:
+------
+
+Topics for today:
+================
+Python Command Line Arguments
+	Usage of Command Line Arguments
+		Accessing command line arguments using sys.argv
+		Parsing command line arguments using argparse module
+
+Class and Objects
+	Creating Class
+	Understanding classes and objects
+		Defining classes
+		Instantiating Objects
+		Creating objects
+		Accessing object attributes and methods
+	Different Types of Variables & Methods
+		Understanding instance, class, and static variables
+		Defining instance, class, and static methods
+		Magic/Dunder Methods
+		Understanding magic methods like init, str
+	Inheritance & Polymorphism
+		Implementing inheritance
+		Understanding polymorphism
+	Logging & Debugging Techniques
+		Using logging module
+		Debugging Python programs
+	Error Handling & Exception Strategies
+		Handling exceptions
+		Creating custom exceptions
+==========================================================
+Python Command Line Arguments:
+------------------------------
+	What is a command?
+		Any runnable(executable) code is referred as a command.
+	
+	What is command Line?
+		In your command prompt, the line of text involving your command is referred to as command line
+		
+	What are command line arguments?
+		the command line, i.e., command along with its arguments is referred to as command line arguments
+	
+	There are different ways to organize command line. 
+	1. using sys.argv 
+		here sys is the module which contains a list called argv storing whole command line (command along with its arguments.
+	Let us see an example:
+	
+==========================================================
+Problems using sys.arg to handle command line arguments:
+--------------------------------------------------------
+1. Check whether user passes any arguments along with your filename. If user passes print the list(without filename) else print an error statement telling "No arguments Passed"
+
+2. Write a program called calNum.py where you pass 3 argument, if less than 3 arguments are passed display an error message "Insufficient arguments" else perform the operation mentioned in the arguments ( + --> add, - --> subtract, / --> float division, % --> Modulus, * --> multiplication, // --> Integer division, ** --> power of)
+Sample Command #1:
+	D:\wipro>python	calNum.py 10 + 20 
+	output: 30
+	D:\wipro>python	calNum.py 100 - 20 
+	output: 80
+
+	
+ python calNum.py 10 + 20 
+sys.argv ==>  ['calNum.py', '10', '+', '20']
+args = argv[1: ] # ['10', '+', '20']
+
+if len(args) == 0:
+=====================================================
+3. 
+python voting.py anand 40
+Output:
+Hello 'Anand', You are eliglible to vote
+
+
+
+
+
+Parsing command line arguments using argparse module:
+-----------------------------------------------------
+	The argparse module provides a more powerful and user-friendly approach/interface to handle command line arguments.
+	
+	In order to use this(steps to follow):
+	1. import argparse
+	2. create an object 
+		parse = argparse.ArgumentParser()
+		parse = argparse.ArgumentParser(description='Program description')
+	3. Adding arguments using add_argument()
+		parse.add_argument('name', help='Name of the user')
+		parse.add_argument('age',type=int, help='Age of the user')
+	4. args = parser.parse_args() 
+		Start taking values from the command line and separate values and store them into variables like name, age and validate, return these variables which is then stored inside args
+		These variables can be acessed using args.name, args.age
+		
+	Other options commonly used with add_argument()
+	
+		parse.add_argument('age',type=int, help='Age of the user')
+		
+		parse.add_argument('-a', '--add',action='show_true', help='Age of the user')
+		
+		parse.add_argument('-a', '--add',nargs=2, type=float, help='Age of the user')
+		
+	Complete the above program for all other operators 
+==========================================		
+	parser.add_argument("--level", choices=["beginner", "intermediate", "advanced"])
+	
+	
+========================================================
+	
+Problem #4:
+-----------
+	Implement a program optionOne.py which takes the following options.
+	
+		python optionOne.py -l -d -e 'some string'
+		
+	 -l or --list --> os.system('ls') --> It will run ls command to list all files and directories in your current directory.
+	 -d or --date --> Should display todays date (you can use datetime module)
+	 -e or --echo "Some string here" --> Display the given string. here echo option should take an argument.
+--------------------------------------------------------
+Problem #2: --> Version 2 -- >#5
+-------------------------
+	using argparse you have done it already.
+	
+Problem #2: --> Version 3
+----------- 
+	parser.add_argument('num1', )
+	parser.add_argument("operator", choices=["+", "-", "*", "/", '//', '%', '**'], help="Operator (+, -, *, /, //, %, **)")
+	parser.add_argument('num2', )
+==========================================================
+OOP --> Object Oriented Programming using Python
+------------------------------------------------
+	From Historical point of view.
+		--> 40's - 50's --> Scientific purpose 
+			--> Fortran---> 3 Statements (control structures)
+			--> Assembler 
+			
+		--> mid-60's to 70's --> 
+			Modularization --> functions--> subtask --> Subprocedure 
+			Algorithms --> Main Focus 
+			Data --> global or shared as arguments to functions
+			C Language as an example	
+		--> In 80's - 90's 
+			Combining data and algorithm together 
+			Importance is given to data as it is given to algorithm.
+			-----
+			This is what your object oriented programming starts...
+			
+		Object Oriented Programming(OOP) in Python is a paradigm based on the concept of "objects"	which contains data(attributes) and code(methods -> functions part of the class). OOP makes the code modular, reusable and easier to understand, implement, and maintain.
+		
+		Terminologies in OOP:
+		---------------------
+		1. Class: A blueprint for creating objects. Here we define the structure by combining data and methods together.
+		2. Object: An instance of a class. Once class is defined we can create objects of that class(variables of the class).
+		3. Attributes: Data that belong to the class. Variables defined inside the class 
+		4. Methods: functions defined inside the class which can access the data defined inside the class 
+		5. Encapsulation: Hiding the internal details(implementation) of an object and exposing only necessary parts which is accessible from outside the class.
+		6. Inheritance: A way to create a new class (sub/child/derived class) from an existing class (super/parent/Base class).
+		7. Polymorphism:The ability of the language to redifine methods in derived classes.
+		
+	In terms of OOP:
+		If a language supports these 4 features...
+		1. Abstraction
+		2. Encapsulation
+		3. Inheritance
+		4. Polymorphism
+	Then the language is said to support OOP
+================================================
+class NumOps:
+	def __init__(self, num): # constructor 
+		self.num = num 
+		
+	def isEven(self):
+		pass 
+	
+	def isPrime(self):
+		pass 
+		
+	def isArmstrong(self):
+		pass 
+
+if __name__ == '__main__':
+	obj = NumOps(10)
+	print(f'10 --> {obj.isEven()}')
+	print(f'10 --> {obj.isPrime()}')
+	print(f'10 --> {obj.isArmstrong()}')
+
+	obj1 = NumOps(153)
+	print(f'153 --> {obj1.isEven()}')
+	print(f'153 --> {obj1.isPrime()}')
+	print(f'153 --> {obj1.isArmstrong()}')
+
+	obj2 = NumOps(101)
+	print(f'101 --> {obj2.isEven()}')
+	print(f'101 --> {obj2.isPrime()}')
+	print(f'101 --> {obj2.isArmstrong()}')
+=====================================================
+def MyDate:
+	dd, mm, yyyy --> initialize	
+	def isLeap(self):
+		pass 
+	
+	def maxDays(self):
+		pass 
+	
+	def monthName(self):
+		pass 
+	
+	def printCal(self, newMonth=0, newYear=0):
+		pass 
+
+	def printJulianCal(self, newMonth=0, newYear=0):
+		pass 
+		
+	def julianDay(self):
+		pass # return julianDay of the given date
+
+    # 1 ,  2,   3,   4,   5,   6,   7
+    # 31 + 28 + 31 + 30 + 31 + 30 + 16 ==> 197
+====================================================
+Problem #
+Implement the class 
+class BitOps:
+	self.num, self.pos
+	__init__()
+	__str__()
+	
+	bitState()
+	bitToggle()
+	nibbleToggle()
+====================================================	
+	
+	
+
+__name__ --> dunder name 		
+__init__ --> dunder int 
+=======================================================
+Understanding classes and objects
+	Defining classes
+	Instantiating Objects
+	Creating objects
+	Accessing object attributes and methods
+
+Different Types of Variables & Methods
+	Understanding instance, class, and static variables
+	Defining instance, class, and static methods
+	Magic/Dunder Methods
+	Understanding magic methods like init, str
+======================================================
+Presenting Today: 
+----------------
+	Ushashri N --> 
+	Jyotisman Kriti Prakash
+	Ritika Chopra
+	Archana Kumari
+	Vikash Kumar Singh
+	karri suma		
+=====================================================
+Presenting Tomorrow:
+--------------------
+	1. Aakarsh N P
+	2. Saurabh Saw   
+	3. Sagar Choudhary
+	4. Gourab Das 
+	5. Thanuja M 
+ 	6. Gyana Ranjan Nath
+	7. Nandhini Budda
+
+	Topics:
+		modules 
+		packages 
+		exception Handling 
+=======================================================	
+
+
+

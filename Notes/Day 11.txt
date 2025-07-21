@@ -1,0 +1,195 @@
+Day 11:
+-------
+
+Regular Expression:
+-------------------
+	Pattern Matching , Flags
+	Using re module for pattern matching
+	Understanding regex flags
+	----------------------------
+	Match(), Search(), Finditer()
+	Finding matches using match(), search(), finditer()
+	----------------------------
+	Findall(), Split()
+	Using findall() for getting all matches
+	Splitting strings using split()
+	----------------------------
+	Group(), Start(), End() &
+	Working with match objects
+	Using group(), start(), end()
+	----------------------------
+	Span()
+	Understanding span of match	
+	----------------------------
+===========================================================
+List Comprehensions
+	Creating lists using list comprehensions
+Iterator and Generators
+	Understanding iterators and generators
+	Creating iterators and generators
+Decorator
+	Understanding decorators
+	Creating and using decorators
+Lambda function- map(), reduce() filter()
+	Understanding lambda functions
+	Using lambda functions with map(), reduce(), filter()
+===========================================================
+Regular Expression:
+-------------------
+	What is an expression?
+		Any thing that involves operators and operands.
+		for example --> c = a + b
+		
+	What is regular expression (re / regex)?
+		A regular is a special string pattern, used to match strings, search , replace or extract part specific patterns from a text.
+	====================================================
+	In UNIX/Linux: there are plenty of commands that supports regular expression for example grep, vi editor, sed, perl, python. Even C/C++ language provide library support for regex.
+===========================================================
+Common Regex Syntax: (Certain operators used in Regex)
+-------------------
+^Word 	--> Word --> start/begining of the line 
+Word$ 	--> Lines ending with the Word 
+. 		--> this will any single character except newline('\n')
+*		--> 0 or more repetitions
++		--> 1 or more repetitions 
+? 		--> 0 or 1 occurence of a character 
+[]		--> any single character specified inside bracket
+	[a-z] --> Small letter as character
+[^]		--> any single character NOT specified inside bracket
+	[^a-z] --> Any character other than Small letter as character
+{n}   --> exactly n number of repetitions
+{n, }   -->  n or more number of repetitions	
+{n, m}   -->  range between n or m number of repetitions
+\d --> digits 
+\D --> Not a digits
+\w --> Word character(a-zA-Z0-9_)
+\W --> Not Word character(a-zA-Z0-9_)
+\s --> White space (space, tab, newline)
+\S --> Not a White space (space, tab, newline)
+() --> Grouping 
+
+In Python, there is a module supporting Regular Expression(Regex). The name of the module is re.
+	import re 
+	
+re module provides some function so we can use those expressions(Regex) inside them(functions).
+
+re.search()	--> searches for a pattern, returns match object 
+re.match() --> Matches pattern only at the start of the string
+re.findall() --> returns all matches in a list 
+re.sub()	--> substitute/replaces occurence of pattern 
+re.split() --> Splits string based on pattern
+re.compile() --> compiles a regex pattern(text expression) into a regex object.
+-------------------------------------------------------
+Problem #1: Validate an Email Address
+Problem #2: Find All Dates in Format DD-MM-YYYY
+Problem #3: Replace Multiple Spaces with One
+Problem #4: Extract All Words That Start With Capital Letters
+Problem #5: Replace all digits in a string with *
+---------------------------------------------------------
+\bRE\b --> 
+	here  \b is word boundary
+===========================================================
+
+
+
+lst = []
+first = 100
+for i in range(100):
+	lst.append(first + i)
+
+print(lst)
+
+List Comprehensions
+	Creating lists using list comprehensions
+----------------------------------------------------------
+Problem #1: Create a list of even numbers from 0 to 100.
+Problem #2: Extract all vowels from a given string.
+Problem #3: Convert a list of strings to uppercase.
+Problem #4: Create a list of tuples(number, square) for numbers 1 to 10.
+Problem #5: Filter out all the negative numbers from a list.
+	nums = [-3, 5, -1, 7, 0]
+	# Output: [5, 7, 0]
+Problem #6: Create a multiplication table (1–5 × 1–5) as a list of lists.
+	# Output: [[1, 2, 3, 4, 5], [2, 4, 6, 8, 10], ...]
+------------------------------------------------------------
+Implement generators:
+Problem #1:
+-----------
+	1. using () -->
+	
+		start, end = 1, 10
+		evenNumbers = (generator here)
+		for i in evenNumbers:
+			print(i, end= ' ')
+		print()
+			
+	2. Same problem given above using function syntax.
+		start, end = 1, 10	
+		evenNumbers = evenGenerator(start, end)
+		for i in evenNumbers:
+			print(i, end= ' ')
+		print()
+
+Problem #2:
+-----------
+	Create a generator function that yields the first n Fibonacci numbers.
+		a. using function syntax
+		
+Problem #3:
+-----------
+	Write a generator function myRange(start, end, step) that works like the built-in range() function.
+		a. using (comprehensions syntax)
+		b. using function syntax
+===========================================================	
+	Iterator:
+		An iterator is an object that implements the iterator protocol, i.e.,
+			1. It has __iter__() method that returns the iterator object itself
+			2. It has __next__() method that returns the next item or raises an exception StopIteration
+			
+		class Iterator:
+			def __init__(self, args):
+				pass 
+			def __iter(self):
+				return self			
+			def __next__(self):
+				either 	raise StopIteration
+				or return next value 
+		
+Problem #1:
+----------
+	n prime numbers from the given starting number. 
+	start --> 100, number of primes = 25
+	
+Problem #2:
+----------
+	n fibonacci series
+
+Problem #3:
+-----------
+	EvenGenerators 
+========================================================
+Presenting Today:
+-----------------
+	1. Aakarsh N P
+	2. Saurabh Saw   
+	3. Sagar Choudhary
+	4. Gourab Das 
+	5. Thanuja M 
+ 	6. Gyana Ranjan Nath
+	7. Nandhini Budda
+
+	Topics:
+		modules 
+		packages 
+		exception Handling 
+		
+		
+For Tomorrow:
+-------------
+Decorator
+	Understanding decorators
+	Creating and using decorators
+Lambda function- map(), reduce() filter()
+	Understanding lambda functions
+	Using lambda functions with map(), reduce(), filter()
+pytest --> Introduction

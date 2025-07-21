@@ -1,0 +1,287 @@
+Day 8:
+-----
+	Python Packages
+		Built-In Packages
+			Importing and using built-in packages like os, sys
+		User Defined Packages
+			Creating and importing user-defined packages
+			Setting up Package Path
+			Understanding package structure
+			Adding directories to package path
+
+	Python Exception Handling
+		Exception Handling
+			Understanding exceptions
+			Using try, except, finally blocks
+		User Defined Packages
+			Creating and using user-defined exceptions
+===========================================================
+file--> moduleOne.py 
+	data = []
+	
+	def funOne():
+		print('funOne()...')
+
+	def funTwo():
+		print('funTwo()...')		
+	
+	def funThree():
+		print('funThree()...')
+=======================================================
+Python Packages
+	User Defined Packages
+		A package in Python is a way to organize related modules into a directory or directory hierarchy. It helps in organizing multiple files into a folder so that you can structure your code and allows modular design and reuse.
+		
+		Inside this directory(simple directory with one or more python modules), contains a special __init__.py
+
+		From python3.3+ this __init__.py is optional.
+		
+		What is the usage of __init__.py file :
+			__init__.py can be empty or used to initialize the package, define exports or import sub-modules.
+			
+Problem#1: Create package myMathLib
+-----------------------------------	
+	myMathLib/    #--> my Package directory
+	|
+	|-->__init__.py   	#--> Makes this folder a package 
+	|-->basic.py 		#--> module 1 inside the package 
+	|-->advanced.py  	#--> Module 2 inside the package
+	|__ utilities/		#sub-package 
+		|--> __init__.py   #makes this folder a package
+		|__  tools.py      #another module 
+		
+	testMyMathlib.py 
+		import here 
+		test the functions from the myMathLib
+---------------------------------------------
+	myMathLib/basic.py:
+	------------------
+		add(n1, n2)
+		sub(n1, n2)
+		divi(n1, n2)
+		mult(n1, n2)
+		modi(n1, n2)
+		modf(n1, n2)
+		pow(n1, n2)	--> n1 ** n2	
+	myMathLib/Advanced.py:
+	----------------------
+		factorial()
+		fibonacci()		
+	myMathLib/utilities/tools.py:
+	-----------------------------
+		isEven()
+		isPrime()
+		isArmstrong()
+============================================================
+Problem#2:
+----------
+	myOsLib/
+    |
+	|--> __init__.py 
+	|-->commands.py --> listDir(), getCWD(), date() 
+	|-->files/
+		|
+		| --> __init__.py 
+		| --> filecmds.py --> copy(), move(), remove() 
+		| --> attributes.py --> getSize(), getPermissions() 
+	|--> dir/
+		 |-->  __init__.py 
+		 |--> dircmds.py --> makeDir(), rmDir(), chDir()	 
+-----------------------------------------------------------
+1. testOSLib.py  
+		import myOsLib
+		myOsLib.copy()
+		myOsLib.move()
+		
+		myOsLib.makeDir()
+		myOsLib.rmDir()
+		
+		myOsLib.listDir()
+		myOsLib.getCWD()
+		
+2. testOSLibOne.py  
+		import myOsLib.files as mosf
+		import myOsLib.dir as mosd
+		import myOsLib.commands as mosc
+		mosf.copy()
+		mosf.move()
+		
+		mosd.makeDir()
+		mosd.rmDir()
+		
+		mosc.listDir()
+		mosc.getCWD()
+	
+def copy():
+	print(f'{__name__} --> copy() called')
+		
+==========================================================
+Python Exception Handling:		
+--------------------------
+	What is an Exception?
+		An exception is an error that occurrs during the execution of a program, which interrupts the normal flow of a program.
+
+	Exceptions happen at runtime and can be handled gracefully without crashing the program.
+-------------------------------------------------
+	How do we handle the exception?
+		We use the following syntax
+		
+		try:
+			//code which might raise an exception 
+			//raise 
+		except :
+			//If exception is raised what is to be done 
+			// handling the exception 
+		else: 
+			//If no exception occurrs 
+		finally:
+			//no matter what whether exception occurs or not
+			
+======================================================
+Flow of execution:
+------------------
+1. statements in try block is executed 
+2. if no exception : statements in else block and then statements in finally are executed.
+3. if an exception occurrs:
+	Python searches for a matching except block (You can have multiple except block)
+	If matched: statements in that except block is executed and then finally
+4. if No match(except) is found then it results in unhandled exception which will terminate/crash the program
+
+	As we have seen multiple except blocks, we can also have multiple exception in single except block
+	try:
+		//code which might raise exception
+	except (ZerrDivisionError, ValueError):
+		//code for handling exception
+=========================================================	
+Custom exception are user can define his own Exception class type by using inheritance.
+
+class MyException(Exception):
+	pass 
+	
+raise MyException('')
+
+
+Some of the commonly used built-in exceptions:
+
+ZeroDivisionError	Division by zero
+ValueError			Invalid value (e.g., int("abc"))
+TypeError			Operation on incompatible types
+IndexError			List index out of range
+KeyError			Accessing non-existent dictionary key
+FileNotFoundError	File access error
+
+====================================================
+Exception Hierarchy:
+-------------------
+
+	BaseException
+	 ├── SystemExit
+	 ├── KeyboardInterrupt
+	 └── Exception
+		  ├── ArithmeticError
+		  ├── LookupError
+		  └── ...
+
+	Only the exceptions derived from Exception class are caught in try-except block.
+==================================================
+	
+
+
+hexa decimal: 0 - f 
+		--> 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, a, b, c, d, e, f
+	0x123 --> 
+	1   2    3
+0001  0010  0011
+
+	0xabc --> 
+ a	   b   c 
+1010 1011 1100	
+	
+=====================================
+Hexa to octal:
+--------------
+	1   2    3						  0   4   4   3
+0001  0010  0011 -->000100100011 --> 000 100 100 011
+Binary to decimal:
+8	7	6 5	  4	  3	 2	 1   0
+1   0   0 1   0   0  0   1   1		
+	2 ^ 0 -->  1
+	2 ^ 1 -->  2
+	2 ^ 5 --> 32
+	2 ^ 8 -->256
+------------------	
+			 291 
+
+Presenting today:
+----------------
+	Deepak Kumar Nayak--> 
+	Akhilesh Pathak
+	prachi singh 
+	Tanishka Oli
+	Prince Mishra
+============================================================
+Presenting Tomorrow: 
+--------------------
+	Ushashri N 
+	Jyotisman Kriti Prakash
+	Ritika Chopra
+	Archana Kumari
+	Vikash Kumar Singh
+	karri suma
+	Topics:
+	------
+		Functions  introductions 
+			What are functions 
+			Types 
+				built-in
+				user defined 
+		Functions arguments
+			types of arguments
+				positional parameters
+				positional parameters with default values
+				variable number of args (*args)
+				kwargs 
+			returning values 
+		Functions control flow
+			recursion
+		Modules:
+			Introduction
+			Built-In modules 
+			user defined modules
+		
+=======================================================
+Topics for tomorrow:
+====================
+Python Command Line Arguments
+	Usage of Command Line Arguments
+	Accessing command line arguments using sys.argv
+	Parsing command line arguments using argparse module
+
+Class and Objects
+	Creating Class
+	Understanding classes and objects
+		Defining classes
+		Instantiating Objects
+		Creating objects
+		Accessing object attributes and methods
+	Different Types of Variables & Methods
+		Understanding instance, class, and static variables
+		Defining instance, class, and static methods
+		Magic/Dunder Methods
+		Understanding magic methods like init, str
+	Inheritance & Polymorphism
+		Implementing inheritance
+		Understanding polymorphism
+	Logging & Debugging Techniques
+		Using logging module
+		Debugging Python programs
+	Error Handling & Exception Strategies
+		Handling exceptions
+		Creating custom exceptions
+
+
+
+
+
+
+

@@ -1,0 +1,245 @@
+Day 12:
+-------
+	Decorator
+		Understanding decorators
+		Creating and using decorators
+	Lambda function- map(), reduce() filter()
+		Understanding lambda functions
+		Using lambda functions with map(), reduce(), filter()
+	pytest --> Introduction
+	Pytest Overview
+	Introduction to pytest
+	Installing pytest
+
+	Test Discovery
+	How pytest discovers tests
+	Naming conventions for tests
+===========================================================
+Decorator:
+---------
+	What is a decorators?
+		Decorators are special HOF(Higher order functions) in python which is used with @methodname just before the function definition 
+		
+	For example:
+		we have used @staticmethod, @classmethod, @abstractmethod inside the class.
+	In addition to these, python provides lot of modules and packages which has decorators defined in them.
+	
+	Some example on pre-defined decorator from module functools.
+	
+	
+	User Defined Decorator:
+	-----------------------
+		In order to define user-defined decorator, we have to have understanding on nesting of functions and function callback (Where you pass function as argument).
+		
+		function callback:
+		-----------------
+			Normally whey you talk about functions, two functions with respect to calling one function acts as caller the other function is getting called (callee/called)
+			
+			def funOne(): #caller 
+				funTwo() # called / callee
+			========================================
+			When it comes to function callback, we pass one function as an argument which in turn will be called inside the function.
+			
+			def funOne(func):
+				func() #
+			
+			def fun():
+				print('fun() called') 
+
+			def funTwo():
+				print('funTwo() called')				
+				
+			funOne(fun)
+			funOne(funTwo)
+			
+Problem#1:
+----------			
+=======================================================
+1. Execution Time Measurement
+	Create a decorator timeIt that measures and prints the execution time of a function. Use it to decorate a function that calculates the factorial of a number.
+
+@timeIt
+def factorial(num):
+	pass 
+
+@timeIt
+def fibo(num):
+	pass 
+=======================================================
+2. Access Control:
+	Write a decorator require_admin that only allows a function to execute if a user dictionary has the role 'admin'. If the user is not an admin, print an 'Access Denied' message.
+
+@requireAdmin
+def deleteUser(userId):
+    print(f"User {userId} deleted")
+
+user = {'username': 'Ramlinga Raju', 'role': 'admin'}
+deleteUser(100)
+
+user = {'username': 'Bantu Reddy', 'role': 'user'}
+deleteUser(200)
+========================================================
+Lambda function- map(), reduce() filter()
+	Understanding lambda functions
+	Using lambda functions with map(), reduce(), filter()
+========================================================
+	Lambda functions or expression?
+		A Lambda function in Python is a small anonymous (no name) function defined using lambda keyword instead of def(Normal functions/nested functions /recursive functions) keyword.
+		
+		Lambda functions are also called as lambda expression or lambda literals.
+		The are used when:
+			1. you need a simple functions for a short period of time
+			2. You are passing function as an argument 
+			
+	Syntax:
+		lambda arguments: expression
+		
+		here 
+			lambda is the keyword
+			arguments is a comma separated (a, b) list of  input arguments
+			expression is a single expression whose result is usually returned.
+			
+		Here in lambda functions only expression can be used, not the statements like if , if-else, while, for , try..)
+
+		map() --> Maps any function to an iterable(collection)
+			returns a new list 
+		reduce() -->takes a functions and iterables give a single result 
+		filter() --> takes a functions and iterables filters based on a condition
+===========================================================	
+Problem #1: Remove Empty Strings
+Given a list of strings (some may be empty), use filter() and a lambda to remove all empty strings.
+Input:
+['hello', '', 'world', '', 'python']
+Output:
+['hello', 'world', 'python']
+========================================================
+Problem #2: Find the Max String by Length
+Given a list of strings, use max() with a lambda to return the longest string.
+========================================================
+Problem #3: Check if Strings Start with a Vowel
+Use filter() and a lambda to return strings that start with a vowel.
+Input:
+['apple', 'banana', 'orange', 'grape', 'umbrella']
+Output:
+['apple', 'orange', 'umbrella']
+========================================================
+Problem #4:  Conditional Lambda – Pass or Fail
+Use a lambda to check if a student passed (>= 40) or failed.
+
+check_pass = lambda marks: "Pass" if marks >= 40 else "Fail"
+Apply this to a list of scores using map().
+=========================================================
+pytest --> Introduction
+-----------------------
+	Pytest Overview
+	Introduction to pytest
+	Installing pytest
+
+	Test Discovery
+	How pytest discovers tests
+	Naming conventions for tests		
+==========================================================
+Pytest Overview:
+	pytest is a powerful and easy to use testing framework for Python. This allows you to write simple unit tests as well as complex functional tests.
+	
+	There are other testing frameworks unittest.
+	
+	Features of pytest:
+		1. It does provide variety of assert functions for assertions and also gives a clear messages for failure.
+		2. Supports for Fixtures in a simple syntax for setup (initialization of data for all test)/ teardown(at the end of the tests (for freeing resources)) logic 
+		3. Provides features for parameterized testing 
+		4. Can capture output of the commands from stdout/stderr
+
+	Installing pytest
+		goto your command prompt: type --> 
+			pip install pytest
+		
+		
+	Test Discovery
+	
+	How pytest discovers tests
+		pytest 			--> run all tests 
+		pytest -x 		--> stop aftet first failure 
+		pytest -maxfail=2 		--> stop afte 2 failures
+		pytest -tb=short --> short traceback
+		pytest -k 'keyword' ---> Run tests matching keyword	
+	
+	Naming conventions for tests		
+		Files: Must start or end with test_ 
+		Functions inside the above mentioned files should start with test_
+		Classes:  Must start with Test and not have __init__()
+
+===============================================
+	arithmeticFun.py	
+		add(a, b)
+		sub(a,b)
+
+	file --> testArithmeticFun.py
+		from arithmeticFun import add, sub 
+		
+		def test_AddFirst():
+			assert add(10,20) == 30
+			
+		def test_AddSecond():
+			assert add(10,-20) == -10
+			
+		def test_SubFirst():
+			assert sub(10,-20) == 30
+			
+		def test_SubSecond():
+			assert sub(100,-20) == 80
+=======================================================
+Different ways of using Assert:
+
+1. Equality & Inequality
+	assert 5 == 5
+	assert 'abc' != 'xyz'
+2. Comparisons
+	assert 10 > 5
+	assert 3 <= 3
+	assert 7 >= 4
+3. Membership
+	assert 'a' in 'abc'
+	assert 3 in [1, 2, 3]
+	assert 'x' not in ['a', 'b']
+4. Identity
+	a = b = [1, 2, 3]
+	assert a is b
+	assert a is not [1, 2, 3]
+5. True / False
+	assert True
+	assert not False
+	assert not []   
+	assert {} == {} 
+6. Type Checks
+	assert isinstance('hello', str)
+	assert not isinstance(123, str)
+7. Exception Handling with pytest.raises
+
+
+==========================================================
+Take 2 problems from day2 to day11 ---> 
+	for each problems write atlease 3 test cases not over 5 test cases 
+==========================================================
+for example:
+======================================================
+		num, pos = 10,3
+		assert (num & 1 << pos ) == 8
+		assert (num & 1 << pos ) != 0
+======================================================
+Presenting Today:
+-----------------
+	1. Nandhini Budda 
+	2. Thanuja M 
+	3. Abhishek Verma 
+	4. Tithi Mallick 
+	5. Shikha S 
+	6. Abhigyan Maji 
+	7. Ankit Pant 
+
+	Topics:
+		Exception
+		Regular Expression
+		Classes and objects
+		Inheritance and polymorphism
+========================================================

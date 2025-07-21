@@ -1,0 +1,230 @@
+Day 10:
+-------
+Different Types of Variables & Methods
+	Understanding instance, class, and static variables
+	Defining instance, class, and static methods
+	Magic/Dunder Methods
+	Understanding magic methods like init, str
+=====> 
+	Attributes of a class:
+		data part of the class.
+		These attributes are encapsulated.(Hiding from external usage)
+		In python we do not have keywords like private, protected, so we follow the convention (Using private as __attribute name and protected as _attribute).
+		
+	Understanding instance, class, and static variables	
+		Instance variable:
+		------------------
+			1.	Defined inside a class within a method(functions inside the class usually __init__) using self.variableName
+			2. 	Each object/instance has a separate copy. Unique to each object/instance
+			3. Changes to that variable will effect that particular object/instance alone.
+		
+		Class Variables:
+		----------------
+			1.	Defined inside the class but used outside the method(Not inside any method).
+			2. One copy of this variable is shared by all the objects/instances of the class.
+			3. Access them using className.var outside the class or self.var inside the methods
+			4. Changing it on the class changes it for all the instances (There is an exception scenaril called shadowed)
+
+		Static Variables:
+		-----------------
+			Python does not support static variables like in traditional languages like C++, Java. They do support static methods using @staticmethod.
+						
+			If by 'static variable',  you mean to say variable shared accross all the instances, then python provides class variable
+	
+Defining instance, class, and static methods
+-------------------------------------------
+	Any class member(method) with self variable as the first argument is referred to as instance method. i.e., they work on instance variables
+	
+	Class Methods(@classmethod): has cls as the first argument. They work on the class but not on instances
+	
+	Static Methods(@staticmethod): does not take self or cls as first argument. Behave like a regular function but belong to the class.
+Problems:
+---------
+	1. Create a Student class with:
+		An alternative constructor that accepts name|age|grade in a string.		
+		A static method to check if a grade is a pass (>= 50).
+	
+	2. Create a Temperature Class with:
+		fromCelsius() and fromFahrenheit() as classmethods
+		A staticmethod to convert Celsius to Fahrenheit and vice versa
+=========================================================
+To be discussed Next:
+---------------------
+	Inheritance & Polymorphism
+		Implementing inheritance
+		Understanding polymorphism
+	
+	Logging & Debugging Techniques
+		Using logging module
+		Debugging Python programs
+	Error Handling & Exception Strategies
+		Handling exceptions
+		Creating custom exceptions
+======================================================	
+Regular Expression:
+-------------------
+	Pattern Matching , Flags
+	Using re module for pattern matching
+	Understanding regex flags
+	----------------------------
+	Match(), Search(), Finditer()
+	Finding matches using match(), search(), finditer()
+	----------------------------
+	Findall(), Split()
+	Using findall() for getting all matches
+	Splitting strings using split()
+	----------------------------
+	Group(), Start(), End() &
+	Working with match objects
+	Using group(), start(), end()
+	----------------------------
+	Span()
+	Understanding span of match	
+	----------------------------
+==========================================================
+Inheritance & Polymorphism
+	Implementing inheritance
+	Understanding polymorphism
+==========================================
+	There are 2 ways of using a class.
+		1. through instantiation --> By creating objects 
+		2. Through derivation --> by Inheritance
+		
+		
+		Inheritance is a way of extending the functionality of an existing class
+		
+	class Person:
+		self.name, self.age 
+		
+	class Student(Person): #Syntax for inheritance 
+		self.grade 
+		#	
+
+	class Employee(Person):
+		self.salary
+Problems #3:
+-----------
+	Extend the Person class with a Student class.			
+	
+	class Student(Person): #Syntax for inheritance 
+		#self.grade --> have data member
+		#	
+========================================================
+Polymorphism:
+-------------
+	Polymorphism in Python is achieved through method overriding. Having methods with same name (common interface) across different classes in a hierarchy(inheritance relationship)
+
+Problem #4:
+-----------
+Package Name: OOPModel
+	Class Name	Description
+	----------  ------------
+	Person		Base class with common attributes (name, email)
+	Employee	Inherits from Person. Abstract class with method calculateBonus()
+	Manager		Overrides calculateBonus()
+	Developer	Overrides calculateBonus()
+	Intern		Overrides calculateBonus()
+
+
+	Person class 	in PersonOne.py 
+	Employee		in EmployeeOne.py 
+	Manager			in EmployeeOne.py 
+	Developer		in EmployeeOne.py 
+	Intern	 		in EmployeeOne.py 
+
+if __name__ == '__main__':
+	from OOPModel.employee import Manager(20), Developer(10), Intern(0)
+	# Employees
+	staff = [Manager("Anand", "anand@xyz.com", 90000),
+			 Developer("Bobby", "bobby@xyz.com", 60000),
+			 Intern("Chanti", "chanti@xyz.com", 5000)]
+
+	for emp in staff:
+		print(f"{emp.name} bonus: {emp.calculateBonus()}")
+
+=================================================
+Logging & Debugging Techniques
+	Using logging module
+	Debugging Python programs
+================================================	
+Error Handling & Exception Strategies
+	Handling exceptions
+	Creating custom exceptions
+=================================================
+Logging & Debugging Techniques
+	Using logging module
+	Debugging Python programs
+
+	Usually we take input from keyboard or assign values to variables directly. 
+
+	We also did see taking input at the time of running your program --> Command line arguments 	
+
+	There is another way of getting input i.e., by storing data in the files.(where your program will read data from the file and store in variables(individual variables or collections like list, tuple, set or dictionary)).
+	
+	====================================================
+	Similarly the output is not only on the screen(using print function).
+	
+	You can send output to a file, network, or servers(application) like sql, web server, ftp server, 
+	
+	Some of the activities/events of your program needs to be marked or stored or alerted then logging information is one of the way. 
+	
+	Advantages of Logging?
+	1. Control over what gets reported (depending on the severity of the event for ex: 
+		1. DEBUG(testing), 
+		2. INFO (giving general information about your application), 
+		3. WARNING(some unexpected events but your application is still working), 
+		4. ERROR (part of the application or program is effected but still working), 
+		5. CRITICAL --> serious error which will crash your application or your OS.
+	2. You can redirect the output of the log message. for example you can display on the screen, store it in a file etc)
+	3. Adding timestamps, program name, line number
+	4. Filter messages by severity or program name 
+	5. You can disable/enable while in production/testing 
+	
+	For working on logging the basic module is 
+	
+		import logging
+		
+	1. Basic Logging Example
+	2. Log Levels (in increasing severity)
+	3. Formatted Logging
+	4. Logging to File
+	5. Logging Exceptions
+	6. using logging in classes 
+	
+	What is debugging?
+	    Debugging is the process of identifying the logical error(bugs). Once you identify the bugs it is easier to fix them. 
+		
+		Python supports debugging using a built-in interactive debugger called pdb.
+		
+	Usage of pdb:
+	-------------
+		import pdb
+		
+		pdb.set_trace() --> Insert break point --> means your program will halt(pause) at the break point. 
+		(pdb) Command prompt for pdb
+		
+		n --> next (step over)
+		s --> step into 
+		c --> continue till next breakpoint or end of the program. 
+		p var --> print 
+		l --> list code 
+		q --> quit (to come out of pdb prompt)
+=========================================================
+Error Handling & Exception Strategies
+	Handling exceptions
+	Creating custom exceptions
+
+
+class MyExceptionOne(Exception):
+	pass 
+
+When you go for customized exception classes please keep the following points in mind:
+
+	1. Custom exceptions should be named clearly to convey the error type.
+	2. Including relevant attributes (e.g., value, balance) makes debugging easier.
+	3. Always call the super().__init__() method to initialize the base Exception class.
+===========================================================
+
+	
+	
+	

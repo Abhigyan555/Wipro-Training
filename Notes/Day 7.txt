@@ -1,0 +1,169 @@
+Day 7:
+-----
+	return values 
+	
+	def fun():
+		pass 
+	
+	--> None
+
+	def fun(num):
+		if cond:
+			return False
+		return True
+	
+	--> True or False 
+
+	def fun(collection):
+		
+		return sum/result	
+	--> int or float 
+	
+	
+	def fun(num):
+		lst = [] # {}  
+		#logic for filling the collection  
+		return lst		
+	
+	for i in fun(num):
+		#logic here 
+============================================
+Nested functions:
+-----------------
+	Writing one function inside another function is called nesting of functions.
+
+Problem:
+-------
+	1. isPalindrome(num):
+		
+		return reverseNum(num) == num
+			
+	2. isArmstrong(num)
+	3. isFactorial(num)	
+======================================================
+Python Modules
+	Built-In Modules
+		Importing and using built-in modules like math, datetime
+	User Defined Modules
+		Creating and importing user-defined modules
+		Setting up Module Path
+		Understanding PYTHONPATH
+		Adding directories to module path
+
+
+Python Modules:
+---------------
+	A module in Python is simply a python(.py) file containing Python definitions(usually functions, data, classes) and statements.  Modules helps to organize, reuse and manage your code by grouping related functions, classes and data(variables) into separate files.
+	
+	Why do we need Modules:
+	1. Code reuse: Write once and use it in multiple programs
+	2. Organization:  it helps to keep code clean and modular
+	3. Maintainability: Easy to update and debug
+	4. Standard Library: Python provides built-in modules for common tasks like math(commonly used mathematical constants and functions), datetime(to use date and time functions), os(commonly used os function).
+	
+	You can classify modules into 3 categories:
+	1. Built-In modules:
+		Provided by Python by Default (No external istallation needed)
+		example: math, os, datetime, random
+	2. User-Defined Modules:
+		Your own .py files containing functions/classes 
+		example: numOps.py, bitOps.py 		
+	3. Third Party Modules:
+		External modules which has to installed once using pip
+		example: numpy, pandas, flask, requests, ...
+	
+	How do we use modules:
+		Basic Import:
+			import moduleName
+			moduleName.function or moduleName.className
+			moduleName.functionName()
+			obj = moduleName.className()
+			
+		Import specific Item(function/class)
+		-----------------------------------
+			from moduleName import functionName
+			functionName()
+			
+		Import with alias:
+		------------------
+			from import moduleName as mn
+			mn.functionName()
+			
+	Built-In Modules:
+	------------------
+	math: this module provides access to mathematical functions as defined in C-standard library
+	Commonly used function 
+		Trignometry function
+		Logarithmic and exponential calculation 
+		Constants like pi, euler
+		Rounding, Factorial
+	
+	import math 
+	math.e --> evalue of e 
+	math.pi --> evalue of pi
+	
+	math.sin(x) --> Sine of x radians
+	math.degrees(x)  --> radian to degrees
+	math.sqrt(x)  --> sqrt of x 
+	math.factorial(x) 
+	math.pow(x, y)
+	
+	math.exp(x) --> Exponential of x (e ^ x)
+	math.log(x) --> Natural logarithm
+	math.log10(x) --> Base-10 logarithm
+	math.ceil(x)
+	math.floor(x)
+
+	datetime Module: For handling Date and Time 
+	----------------
+		This module helps in date/time manipulation, formatting and allows arithmetic operation
+		Important classes in this module:
+			datetime.date --> dates only 
+			datetime.time --> time only 
+			datetime.datetime --> both date and time
+			datetime.timedelta --> for time difference
+			
+		commonly used functions:
+		------------------------
+		datetime.now() --> Current date and time 
+		datetime.today() --> Today's date 
+		datetime.strptime(str,format)-->from string->datetime 
+		datetime.strftime(format)-->from datetime-->string 
+		date(year,month, day) --> create a date object 
+		timedelta(days=5) --> Time Duration
+		
+os module:
+----------
+	import os 
+	
+	os.environ --> dictionary of environment variables
+	
+	os.getcwd() --> prints current working directory
+	os.listdir(path) --> list files/folders in the given path
+	os.mkdir(path) --> Create a directory 
+	os.makedirs(path) --> create nested directories
+	os.remove(file) --> delete a file 
+	os.rename(src, dest)--> rename file/folder src to dest 
+	os.path.join('path', filename) --> join path with filename
+	os.path.exists(path) --> check if path exists
+	
+	1. Copy numOps.py file into your current directory. 
+		importing numOps module....
+			A. print first 25 prime numbers from any given number. 
+			b. print all armstrong numbers between 1 - 100000
+			c. print all palindrome numbers between 1 - 50000
+	
+	in my system defaule installed module (python files) are present in this path ==>	C:\python3.10\Lib
+	
+	we can add new directory/directories containing python files into sys.path list by using append()
+===========================================================
+	datetime
+	os
+	random
+===========================================================
+
+
+	
+	
+	
+	
