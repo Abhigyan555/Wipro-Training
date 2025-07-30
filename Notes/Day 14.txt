@@ -1,0 +1,360 @@
+Day 14:
+------
+	Pytest Command Line Arguments
+	Running pytest from command line
+	Understanding common pytest flags
+
+	Customizing Tests with Command Line and Configuration Files
+	Customizing pytest using pytest.ini
+	Using command line arguments in tests
+-----------------------------------------
+	Handling Skips and Expected Failures
+		Skipping tests
+		Marking tests as expected to fail
+
+	Distributed and Parallel Tests
+		Running tests in parallel
+------------------------------------------
+	Reporting Test Results and Tracking Test History
+		Understanding test reports
+		Tracking test history over time
+
+	Writing and Running Unit Tests
+		Writing unit tests for your code
+		Running unit tests using pytest
+
+	Writing Functional Tests
+		Writing functional tests for your code
+		Running functional tests using pytest
+====================================================
+	Pytest Command Line Arguments
+		pytest 			--> run all tests 
+		pytest -x 		--> stop after first failure 
+		pytest -maxfail=2 		--> stop after 2 failures
+		pytest -tb=short --> short traceback
+		pytest -k 'keyword' ---> Run tests matching keyword
+		pytest -s or --capture=no #show output immediately
+		pytest -m --> inserting marker
+		pytest --html=myhtmlFilename.html #generate the report(output) into a html file
+=========================================================
+ This is at the time of running the test using pytest command 
+	pytest -s -v test_filename.py --maxfail=2 --tb=short 
+In you want to have  the above mentioned command line options to your pytest command then we add these options in pytest.ini 
+
+[pytest]
+addopts = -v -s 	
+
+
+
+You can add in your command line argument just like in argparse we used to define our own options for our program 
+
+Similary If you want to add your own options you use addoption()
+
+
+ You can also configure these/any other command line arguments (options) in conftest.py by providing options using pytest_addoption():
+ 
+	def pytest_addoption(parser):
+		parser.addoption(
+			'--env', -s, -v, --maxfail=2, --tb=short, help='What message to be printed'
+			)
+			
+	import pytest 
+	@pytest.fixture
+	def env(request):
+		return request.config.getoption('--env')
+	
+	And in your test file (test_envOne.py)
+	
+	def test_envValue(env):
+		assert env in ['dev', 'staging', 'prod'] 
+	
+	pytest  test_envOne.py --env='staging'
+==================================================
+--env ==> staging/dev/prod
+--exam --> alpha/beta/unit/module/Inegration
+--platform ==> Linux/Window/MacOS
+--prot ==> https/sftp/ssh
+--loc --> chennai/bangalore/kolkata
+--prods --> dell/lenovo/apple/hp	
+===================================================
+Handling Skips and Expected Failures
+	Skipping tests
+	Marking tests as expected to fail
+===================================================
+	Skipping tests
+	or 
+	marking tests as expected to fail 
+	----------------------------------
+	in pytest, skipping tests or expected failure is useful when:
+		1. some tests are not applicable due to certain conditions (for ex: OS, Python version, Browser)
+		2. A known bug is being fixed and you want to track it
+		3. You are waiting on an external system or imcomplete feature. 
+		
+	How do we skip tests?
+	
+	import pytest 
+	
+	@pytest.mark.skip(reason='Functionality not implemented')
+	def test_funOne():
+		pass 
+		
+	pytest >= 5.3.0
+	pytest.skip(..., allow_module_level=True)
+		
+Different levels of skip from pytest 	
+	1. simple skip 
+	2. conditional skip 
+	3. programatic skip 
+	4. skip whole skip 
+	5. skip whole module 
+========================================================	
+	Marking tests as expected to fail:
+	----------------------------------
+		assert False --> It fails the condition/test case 
+		
+		We can expect certain conditions to fail 
+		
+		@pytest.mark.xfail(reason='What ever reason')
+		def test_funFailOne():
+			assert False 
+			
+	Expected Failure:
+	-----------------
+		Used when a test is expected to fail due to known reason.
+		
+		1. Simple fail (xfail)
+		@pytest.mark.xfail(reason='What ever reason')
+		def test_funFailOne():
+			assert False 
+
+		@pytest.mark.xfail(reason='Known Bug here')
+		def test_funFailTwo():
+			assert 10 + 20 == 40
+			
+		While running pytest, this shows x in the output and does not count as a failure(Expected failure).
+		
+
+		2. xfail with condition:
+		@pytest.mark.xfail(sys.platform=='win32', reason='Platform specific')
+		def test_funFailThree():
+			assert True
+	
+		@pytest.mark.xfail(sys.platform=='win32', reason='Platform specific')
+		def test_funFailThree():
+			assert False
+
+		3. Enforcing failure  --> xfail(strict=True)
+		Making Failure mandatory.
+		If test passes, pytest will mark it as an error.
+		
+		@pytest.mark.xfail(reason='Enforcing Failure', strict=True)
+		def test_funFailFour():
+			assert True
+----------------------------------------------------------	
+		Results:
+			skipped = test was skipped
+			xfailed = test failed as expected
+			xpassed = test unexpectedly passed (xfail without strict=True)
+---------------------------------------------------------
+Next Topic:
+-----------
+	Distributed and Parallel Tests
+		Running tests in parallel
+
+
+	parallel --> running your code on multi-core machines(quad-core(4), octa-core(8)) or multi-processor machines.
+		
+	Distributed --> Running you code on mulple-machines connected through network using some protocols (remote execution like ssh)
+	
+	Running distributed and parallel tests pytest is commonly done using the pytest-xdist plugin. It enables you to run in parallel (across multiple CPUs or machines) reducing  test execution time (especially for large test suites).
+	Steps:
+	1. install pytest-xdist package
+		pip install pytest-xdist
+	
+	2. run test in parallel with -n option
+		here -n num option to specify how many CPU cores to use.
+		
+		for example:
+			pytest -n 4
+			Pytest will automatically distribute tests across 4 workers(processes).
+			
+		Auto-detect CPU cores:
+			pytest -n auto 
+			
+			This will all CPU cores 
+	
+	Distributed:
+	-----------
+		to run test across mulple-machines/multiple hosts.
+		
+		pytest -n 4 --tx ssh=user@host/ipaddr//python=python3 
+			in addition to the above command you can also 
+			--dist=loadscope 
+			--dist=loadfile 
+			--dist=no 
+			loadscope--> group by test class or module 
+			loadfile--> group by file
+			no --> disable distribution
+-------------------------------------------------------	
+		Handling shared resources:
+	 when tests might crash or share state:
+		--> use --boxed 
+			to run each test in its own sub-process.(helps to run each test file in isolation)
+			pytest -n 4 --boxed 
+				--> be carefule when used with 
+						shared files 
+						shared databases 
+						network ports 
+==========================================================
+Next Topic:
+-----------
+	Reporting Test Results and Tracking Test History
+		Understanding test reports
+		Tracking test history over time
+==========================================================
+In any testing, reporting/gathering test results and tracking test history are important for 
+
+	1. Understanding the outcome of each test run 
+	2. capturing trends over time (ex: improvements)
+	3. Sharing results across teams or CI(continues integration) pipline
+	4. Debugging failures using detailed logs and artifacts( screen shots or bug-report)
+
+Method #1:	
+	Simplest form of reporting on your terminal.
+		pytest -v 
+
+Method #2:
+	Saving the result into a file (html, json or JUnit XML)
+	In order to generate html:
+		you have to install pytest-html plugin
+	
+		pytest --html=reportOne.html  --self-contained=html 
+	
+	json Report:
+	------------
+		pip install pytest-json-report
+		
+		run:
+			pytest --json-report 
+			
+			report is generated in .report.json 
+				--> useful for dashboard or test analytics
+===========================================================
+	JUnit XML Report:
+	----------------
+		pytest --junitxml=report.xml
+		
+	These files are useful for CI tools like gitlab, jenkins etc.
+	These are are machine readable reports.
+====================================================
+Test History Tracking:
+---------------------
+	Manually:
+	--------
+		manually you save reports over time 
+		CI/CD: (Continuous Integration/C Deployment)
+		CI/CD pipelines can archive:
+			report.html
+			report.xml 
+			logs or screenshots
+		You can put them into a folder by date/time and zip them, commit, version 
+		
+	Tools :
+		pytest-cache or pytest built-in cache 
+		
+	pytest internally uses .pytest-cache/ folder to track:
+		--> last failed tests (--lf)
+		--> last durations (--durations)
+		--> Nod IDs, run times etc.
+		
+		pytest --lf #run only last failed tests 
+		pytest --ff #run failed first 
+		pytest --cache-show #show stored cache keys
+		
+		pytest --durations=5
+			5 slowest tests
+			
+=======================================================
+	Writing and Running Unit Tests
+		Writing unit tests for your code
+		Running unit tests using pytest	
+	
+	Unit --> In Python 
+		functions 
+		classes 
+			methods 
+		Modules:
+			classes 
+				methods 
+			functions 
+		
+		Packages
+			Modules 
+			
+=====================================================
+
+	Writing Functional Tests
+		Writing functional tests for your code
+		Running functional tests using pytest
+		
+	What is functional test?
+		Functional testing is a type of software testing that validates the end-to-end behavior of a system or component against the functional requirements 
+		
+		It tests What the system does, not how it is done.
+		
+	Goal of functional testing:
+		1. Ensure the entire system behaves as expected 
+		2. simulate real-world inputs and check its output 
+		3. Usually involves IO/Files/Data base/Networking/Web 
+	
+========================================================
+Write a code called:
+	wordCount.py 
+		--> countWords()
+		--> countCharacters()
+		--> countLines()
+
+running the command:
+--------------------
+	wordCount.py -w filename.txt 
+	wordCount.py --word filename.txt 
+		33	 filename.txt
+	wordCount.py -c or --char  filename.txt 
+		221 filename.txt
+	wordCount.py -l or --lines  filename.txt 
+		7	filename.txt
+	wordCount.py filename.txt 
+		7  33 221 filename.txt
+	wordCount.py -lwc filename.txt 
+		7  33 221 filename.txt
+	wordCount.py --lines --word --char filename.txt 
+		7  33 221 filename.txt
+=====================================================
+subprocess	--> Module can be used to run commands and capture outputs ...
+	Intro to this:
+=========================================================
+	
+Provide:
+	unit testing  --> testing individual functions
+	functional testing --> running command along with commandline args to capturing the output and comparing the same.
+======================================================	
+capsys: capture system output (stdout)
+	pytest supports it by default.
+
+	1. pass capsys as function argument in test case:
+		def test_funOuputOne(capsys):
+			print('What ever output')
+			captur = capsys.readouterr()
+			assert 'What' in captur.out 
+			assert 'ever' in captur.out 
+			assert 'output' in captur.out 
+			assert 'What ever output' in captur.out 
+			
+		def test_funOuputTwo(capsys):
+			funOne() #that can be done for unit testing 
+			captur = capsys.readouterr()
+			assert 'What' in captur.out 
+			assert 'ever' in captur.out 
+			assert 'output' in captur.out 
+			assert 'What ever output' in captur.out
+

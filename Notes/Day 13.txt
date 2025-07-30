@@ -1,0 +1,139 @@
+Day 13:
+------
+	xUnit Style Setup and Teardown
+	Understanding setup and teardown in pytest
+
+	Test Fixtures
+	Creating and using fixtures
+
+	Conftest.py
+	Using conftest.py for shared setup and teardown
+
+	Parameterizing Tests
+	Running tests with different inputs
+	
+	Assert Statements and Exceptions
+	Writing assert statements
+	Testing exceptions
+		--> with pytest.raises
+==============================================================
+XUnit --> is a family name given to a bunch of unit testing framework which is used across different OOP languages
+for Example:
+	CUnit --> C language
+	CPP Unit --> C++ language
+	JUnit --> Java
+	SUnit --> Small talk
+	xUnit --> .Net 
+	unittest --> python module
+
+	Kent Beck and Eric Gamma were very much impressed with SUnit (Smalltalk based unit testing framework). This framework was introduced in Java by these two people (They called it JUnit).
+
+	
+	In the above mentioned framework, Setup and Teardown methods is used as a fixture based approach.
+	
+	These methods will be called in at the 
+		Setup --> start of the test and 
+		Teardown --> after finishing all the tests
+		
+	In order to help people coming this background(XUnit) to get adjusted to pytest module and port the existing testing code(written in unittest). to pytest these setup/teardown is supported in pytest
+	
+	The supported XUnit style methods:
+	module level scope--> 
+		setup_module()-->teardown_module()
+	function level scope-->
+		setup_function()-->teardown_function()
+	class level scope-->
+		setup_class()-->teardown_class()
+	method level scope-->
+		setup_method()-->teardown_method()
+========================================================
+Problem #1:
+-----------
+ Setup a database connection
+	Initialize the variable dbConnection = "TestDBConnection" mock database connection (you can just return a string like "TestDBConnection" for now) inside your setup. Use it in a test function to assert that the connection string is not None.
+	
+Problem #2:
+-----------	
+Shared state fixture
+	Initialize the sampleData in the setup() sampleData[1, 2, 3]. Write 2 test that checks if the sum of the list is 6, and product is 6.
+===========================================================
+Problem #3: 
+------------
+User Profile
+userProfile = {'user': username, 'role': 'admin'}
+Write a test that uses userProfile and checks the dictionary values like username, role.
+
+	
+import pytest 
+
+@pytest.fixture 
+def sample(): 
+	pass 
+=======================
+from pytest import fixture
+
+@fixture
+def sample():
+	pass
+	
+
+@fixture --> default scope --> function scope 
+@fixture(scope='class') --> class scope --> class scope 
+@fixture(scope='module') --> module scope -->module scope 
+@fixture(scope='package') --> package scope -->package scope
+@fixture(scope='session') --> session scope -->session scope 
+===========================================================
+Problem #1: Setup a database connection
+	Write a fixture called dbConnection() that returns a mock database connection (you can just return a string like 'MockDBConnection' for now). Use it in a test function to assert that the connection string is not None.
+
+Problem # 2: Shared state fixture
+Create a fixture sampleData() that returns a list [1, 2, 3]. Write two test that checks 
+	if the sum of the list is 6 
+	The product of the list is 6.
+
+Problem # 3: Dictionary 
+	Define two fixtures:
+		username() that returns "admin"
+		userProfile(username) that returns {"user": username, "role": "admin"}
+	Write a test that uses userProfile and checks the dictionary values.
+==========================================================
+Problem # 2: Shared state fixture
+Create a fixtures as mentioned below. 
+	Write two test in each file that checks list along with the result.
+	
+	sumData() --> returns a list ([1, 2, 3], 6).
+	prodData() --> returns a list ([1, 2, 3], 6).
+	
+	sumDataFix() --> data for sum with params --> 3 list of values along with res 
+	prodDataFix() -->data for product with params --> 3 list of values along with res 
+=====================================================	
+	problem2/
+	  |
+	  | --> conftest.py --> fixtures are present here 
+	  | --> test_fixtureFunction.py 
+	  | --> test_fixtureClass.py
+	  | --> test_fixFuncParam.py	  
+	  | --> test_fixClassParam.py	  
+======================================================
+Presenting Today:
+-----------------
+21-July-2025:
+-------------
+	1. Thanuja M --> MIC Problems
+	2. Abhishek Verma  --> CL Args using notepad/ No code 
+	3. Akash M  --> No Response
+	4. Vasu Gaur --> No Response
+	5. Jyotirmay Chowdhury --> Decorators Intro with demo 
+	6. Amit Pandey --> No Response
+	7. Pankaj --> Command line arguments argv, list comp, 
+	8. Deepak Kumar Nayak --> Generator function, num_gen() demonstraton.	
+	9. Ushashri N --> CLA, list comp	
+Topics:	
+	1. Regex
+	2. Command line args 
+	3. list compreshension, 
+	4. generators , iterators
+	5. Decorators 
+	6. Pytest: Introduction
+	
+
